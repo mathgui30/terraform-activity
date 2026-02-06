@@ -1,0 +1,10 @@
+# Terraform
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+.terraform/
+
+# Chaves de Segurança
+my-aws-key
+my-aws-key.pub
+id_rsa_aws

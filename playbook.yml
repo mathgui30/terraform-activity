@@ -1,0 +1,43 @@
+---
+- name: Configurando o Servidor Web
+  hosts: all
+  become: yes
+  tasks:
+    - name: Atualizar pacotes (apt upgrade)
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Instalar Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Criar página customizada
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html lang="pt-br">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Minha Infra de Dev</title>
+              <style>
+                  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+                  .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 500px; }
+                  h1 { color: #232f3e; margin-bottom: 0.5rem; } /* Cor oficial AWS */
+                  p { color: #666; line-height: 1.6; }
+                  .badge { background: #ff9900; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+                  .footer { margin-top: 2rem; font-size: 0.8rem; color: #aaa; }
+              </style>
+          </head>
+          <body>
+              <div class="card">
+                  <div class="badge">AWS + Terraform + Ansible</div>
+                  <h1>Landing Page On-line!</h1>
+                  <p>Página feita para a atividade da aula de Infraestrutura Automatizada, usando <b>Terraform</b> para a infraestrutura na AWS e <b>Ansible</b> para configurar servidor NGINX.</p>
+                  <div class="footer">Matheus - Turma 2 Engenharia de Software </div>
+              </div>
+          </body>
+          </html>
